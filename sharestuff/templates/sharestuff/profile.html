@@ -1,0 +1,10 @@
+{% extends 'sharestuff/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h1>Liste over hva {{ request.user }} har likt </h1>
+{% for ting in likte_titler %}
+<p>{{ ting }}</p>
+{% endfor %}
+{% endblock %}

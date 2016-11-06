@@ -1,0 +1,24 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+    <h1>Logg inn for å dele</h1>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+</form>
+</div>
+<div class="col-md-6">
+<h2>Beta</h2>
+<p>
+Mens Kunnskapsdeleren er i beta, må du sende en e-post for å be om brukernavn
+og passord. Send til <a href="mailto:hakdo@outlook.com">hakdo@outlook.com</a>
+for å be om tilgang.
+</p>
+<p>
+Dette er en tidlig lukket beta-test. Forvent hickups, og noter feilmeldinger
+og irritasjonsmomenter. 
+</p>
+</div>
+{% endblock %}

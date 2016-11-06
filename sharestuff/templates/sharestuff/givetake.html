@@ -1,0 +1,41 @@
+{% extends 'sharestuff/base.html' %}
+{% block content %}
+     <div class="row">
+       <div class="col-md-4">
+         <a href="{{ 'give' }}">
+         <h1><i class="fa fa-gift" aria-hidden="true"></i>
+           Gi bort</h1>
+       </a>
+
+         <p>
+           Del dine beste undervisningsopplegg her - og la samfunn, kolleger og
+           elever nyte godt av det du har å gi!
+         </p>
+
+
+       </div>
+       <div class="col-md-4">
+         <a href="{{ 'take' }}">
+         <h1>
+           <h1><i class="fa fa-leaf" aria-hidden="true"></i>
+
+           Ta med</h1>
+       </a>
+         <p>
+           Gode lærere deler kunnskap. Hent kunnskap og inspirasjon her.
+           Gratis - og til beste for samfunn, lærer og elev!
+         </p>
+
+       </div>
+       <div class="col-md-4">
+         <h1><i class="fa fa-bullhorn" aria-hidden="true"></i>
+           Nyheter</h1>
+         <p>Ny plattform for å dele undervisningsopplegg - sorter på klasse og fag!
+         </p>
+       </div>
+     </div>
+     <hr>
+     <address class="minfo">verjson: proto_0.1 |
+       <a href="mailto:hakdo@outlook.com">hakdo@outlook.com</a>
+     </address>
+{% endblock %}

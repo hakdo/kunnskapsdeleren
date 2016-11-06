@@ -1,0 +1,14 @@
+Notes
+-------
+su: hakdo, pw heimdal2016
+
+
+Backlog (kort sikt):
+-------------
+Bedre presentasjon av prosjektliste i take.html
+En view for detaljer om hvert prosjekt
+Brukeradministrasjon
+"Liker"-system for å stemme på gode undervisningsopplegg
+Mulighet til å dele enkeltprosjekter på e-post og sosiale medier
+
+Testing

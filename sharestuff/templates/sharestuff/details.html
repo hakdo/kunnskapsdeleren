@@ -1,0 +1,66 @@
+{% extends 'sharestuff/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>
+      <i class="fa fa-briefcase" aria-hidden="true"></i>
+      {{ teaching.tittel}}
+      <small>{{ teaching.fag }} | {{ teaching.klasse }}</small>
+    </h1>
+<p>{{ teaching.beskrivelse }}</p>
+  </div>
+  <div class="col-md-4">
+    <p class="minfo">Eier: {{ teaching.eier }}</p>
+    <p class="dwnld">
+      <a href="{{ teaching.link }}" class="likeit">
+      {% if teaching.mediatype == 'youtube' %}
+      <i class="fa fa-youtube" aria-hidden="true"></i>
+      Gå til YouTube
+      {% endif %}
+      {% if teaching.mediatype == 'powerpoint' %}
+      <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
+      Last ned PowerPoint-presentasjon
+      {% endif %}
+      {% if teaching.mediatype == 'text' %}
+      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      Last ned tekstdokument!
+      {% endif %}
+      {% if teaching.mediatype == 'zip' %}
+      <i class="fa fa-file-zip-o" aria-hidden="true"></i>
+      Last ned zip-arkiv
+      {% endif %}
+      {% if teaching.mediatype == 'www' %}
+      <i class="fa fa-external-link" aria-hidden="true"></i>
+      Se egen webside
+      {% endif %}
+      {% if teaching.mediatype == '' %}
+      <i class="fa fa-question-circle" aria-hidden="true"></i>
+      Ikkjenokomediumspesifisert
+      {% endif %}
+    </a>
+    </p>
+
+    <form method="POST">{% csrf_token %}
+    <button type="submit" class="hiddenbutton">
+    <p class="likeit">
+      {% if has_liked %}
+      <i class="fa fa-heart" aria-hidden="true"></i>
+      {% else %}
+      <i class="fa fa-heart-o" aria-hidden="true"></i>
+      {% endif %}
+      Liker
+      {%if teaching.likes > 0 %}
+      <span class="badge"> {{ teaching.likes }}</span>
+      {% endif %}
+    </p>
+  </button>
+    <p class="likeit">
+      <a class="likeit" href="{% url 'take' %}">
+      <i class="fa fa-list" aria-hidden="true"></i>
+      Til prosjektliste
+    </a>
+    </p>
+  </div>
+
+{% endblock %}

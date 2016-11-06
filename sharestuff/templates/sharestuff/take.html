@@ -1,0 +1,44 @@
+{% extends 'sharestuff/base.html' %}
+{% block content %}
+<h1>
+  <h1><i class="fa fa-leaf" aria-hidden="true"></i>
+  Vil du ta med noe i dag?</h1>
+  <p class="minfo">Klikk på prosjektet for å se detaljer og få tilgang til ressurser</p>
+<ul class="list-group">
+{% for teaching in teachings %}
+<li class="list-group-item">
+<a href="{% url 'details' pk=teaching.pk %}">
+  {% if teaching.mediatype == 'youtube' %}
+  <i class="fa fa-youtube" aria-hidden="true"></i>
+  {% endif %}
+  {% if teaching.mediatype == 'powerpoint' %}
+  <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
+  {% endif %}
+  {% if teaching.mediatype == 'text' %}
+  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+  {% endif %}
+  {% if teaching.mediatype == 'zip' %}
+  <i class="fa fa-file-zip-o" aria-hidden="true"></i>
+  {% endif %}
+  {% if teaching.mediatype == 'www' %}
+  <i class="fa fa-external-link" aria-hidden="true"></i>
+  {% endif %}
+  {% if teaching.mediatype == '' %}
+  <i class="fa fa-question-circle" aria-hidden="true"></i>
+  {% endif %}
+
+  {{ teaching.tittel }} | {{ teaching.fag }} | {{ teaching.klasse }}
+  {% if teaching.likes > 0 %}
+  <i class="fa fa-heart-o" aria-hidden="true"></i>
+  <span class="badge ra">{{ teaching.likes }}</span>
+  {% endif %}
+</a>
+
+</li>
+{% endfor %}
+</ul>
+<p>Foreløbig er dette bare en enkel liste med lenker. Tenkte å lage noe mer
+  fornuftig etter hvert.
+</p>
+
+{% endblock %}

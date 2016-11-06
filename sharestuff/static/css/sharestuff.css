@@ -1,0 +1,52 @@
+h1 {
+  color: #aaaaaa;
+}
+
+h1:hover {
+
+}
+
+.orders {
+
+}
+
+input, textarea {
+  width: 100%;
+}
+
+.minfo {
+  font-size: 0.85rem;
+  color: #aa3c3c;
+}
+
+p.dwnld {
+  font-size: 1.8rem;
+  color: #aa3c3c;
+}
+
+.likeit {
+  font-size: 1.8rem;
+  color: #aa3c3c;
+}
+
+li:hover {
+  background-color: #ccaaff;
+  font-weight: bolder;
+  font-size: 2.5rem;
+}
+
+.ra {
+  text-align: right;
+}
+
+button.hiddenbutton {
+  text-decoration: none;
+  background: none;
+  border: none;
+}
+
+.userinfo {
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: #aa3c3c;
+}

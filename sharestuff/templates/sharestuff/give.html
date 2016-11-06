@@ -1,0 +1,50 @@
+{% extends 'sharestuff/base.html' %}
+{% block content %}
+<h1>
+  <h1><i class="fa fa-gift" aria-hidden="true"></i>
+  Hva vil du dele i dag?</h1>
+
+<form method="POST">{% csrf_token %}
+
+<ul class="list-group">
+<li class="list-group-item">
+<div class="form-group">
+  <label for="{{ form.id_tittel }}">Tittel: </label>
+    {{ form.tittel }}
+  </div>
+</li>
+<li class="list-group-item">
+<div class="form-group">
+  <label for="{{ form.id_beskrivelse }}">Beskrivelse av undervisningsopplegg: </label>
+    {{ form.beskrivelse }}
+  </div>
+</li>
+<li class="list-group-item">
+<div class="form-group">
+  <label for="{{ form.id_klasse }}">Klasse: </label>
+    {{ form.klasse }}
+  </div>
+</li>
+<li class="list-group-item">
+<div class="form-group">
+  <label for="{{ form.id_fag }}">Fag: </label>
+    {{ form.fag }}
+  </div>
+</li>
+<li class="list-group-item">
+<div class="form-group">
+  <label for="{{ form.id_tittel }}">Link til nedlastning: </label>
+    {{ form.link }}
+  </div>
+</li>
+<li class="list-group-item">
+<div class="form-group">
+  <label for="{{ form.id_mediatype }}">Velg mediatype: </label>
+    {{ form.mediatype }}
+  </div>
+</li>
+</ul>
+<button type="submit" class="save btn btn-default">Del</button>
+</form>
+
+{% endblock %}
