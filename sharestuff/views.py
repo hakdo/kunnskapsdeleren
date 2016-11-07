@@ -49,7 +49,10 @@ def details(request, pk):
         return render(request, 'sharestuff/details.html', {'teaching': teaching ,'has_liked': has_liked})
     else:
         teaching = get_object_or_404(TeachPack, pk=pk)
-        return render(request, 'sharestuff/details.html', {'teaching': teaching})
+        has_liked=False
+        if request.user in teaching.har_trykt_liker.all():
+            has_liked = True
+        return render(request, 'sharestuff/details.html', {'teaching': teaching, 'has_liked': has_liked})
 
 def profile(request):
     myprofile = User.profile
