@@ -7,4 +7,8 @@
 {% for ting in likte_titler %}
 <p>{{ ting }}</p>
 {% endfor %}
+<h1>Liste over hva {{ request.user }} har delt </h1>
+{% for ting in har_delt %}
+<p>{{ ting }}</p>
+{% endfor %}
 {% endblock %}

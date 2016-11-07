@@ -56,7 +56,13 @@ def profile(request):
     # Find out what the user has liked
     CollectionOfObjects = TeachPack.objects.all()
     likte_titler = []
+    har_delt = []
+    print(request.user)
     for item in CollectionOfObjects:
+            print(item.eier.username)
             if request.user in item.har_trykt_liker.all():
                 likte_titler.append(item.tittel)
-    return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler})
+            if request.user.username == item.eier.username:
+                har_delt.append(item.tittel)
+    print(har_delt)
+    return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt})
