@@ -29,10 +29,9 @@ p.dwnld {
   color: #aa3c3c;
 }
 
-li:hover {
-  background-color: #ccaaff;
+li.list:hover {
+  background-color: #ccccaa;
   font-weight: bolder;
-  font-size: 2.5rem;
 }
 
 .ra {
