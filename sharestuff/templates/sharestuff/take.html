@@ -1,9 +1,11 @@
 {% extends 'sharestuff/base.html' %}
 {% block content %}
-<h1>
-  <h1><i class="fa fa-leaf" aria-hidden="true"></i>
-  Vil du ta med noe i dag?</h1>
-  <p class="minfo">Klikk på prosjektet for å se detaljer og få tilgang til ressurser</p>
+
+<div class="row">
+  <div class="col-md-8">
+    <h1><i class="fa fa-leaf" aria-hidden="true"></i>
+    Vil du ta med noe i dag?</h1>
+    <p class="minfo">Klikk på prosjektet for å se detaljer og få tilgang til ressurser</p>
 <ul class="list-group">
 {% for teaching in teachings %}
 <li class="list-group-item list">
@@ -37,6 +39,16 @@
 </li>
 {% endfor %}
 </ul>
+</div>
+
+<div class="col-4-md">
+<h1>#tags</h1>
+{% for hashtag in tags %}
+<a href="{% url 'tags' pk=hashtag.pk %}">{{ hashtag.hashtag }}</a>
+{% endfor %}
+</div>
+
+</div>
 <p>Foreløbig er dette bare en enkel liste med lenker. Tenkte å lage noe mer
   fornuftig etter hvert.
 </p>

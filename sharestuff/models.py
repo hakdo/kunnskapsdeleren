@@ -25,8 +25,16 @@ class TeachPack(models.Model):
     likes = models.IntegerField(default=0)
     har_trykt_liker = models.ManyToManyField(User, related_name='likertrykker', blank=True)
 
+
     def __str__(self):
         return self.tittel
+
+class Hashtag(models.Model):
+    hashtag = models.CharField(max_length = 200)
+    tagget_ressurs = models.ManyToManyField(TeachPack, blank=True)
+
+    def __str__(self):
+        return self.hashtag
 
 class Profile(models.Model):
     # This is a test - move to registration app later

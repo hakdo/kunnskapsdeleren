@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^take$', views.take, name='take'),
     url(r'^details/(?P<pk>\d+)/$', views.details, name='details'),
     url(r'^p$', views.profile, name='profile'),
+    url(r'^tag/(?P<pk>\d+)/$', views.tags, name='tags'),
 ]

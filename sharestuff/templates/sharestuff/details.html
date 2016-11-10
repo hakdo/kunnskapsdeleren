@@ -9,6 +9,12 @@
       <small>{{ teaching.fag }} | {{ teaching.klasse }}</small>
     </h1>
 <p>{{ teaching.beskrivelse }}</p>
+<hr />
+<p>
+  {% for tag in tags %}
+    <a href="{% url 'tags' pk=tag.pk %}">{{ tag.hashtag }}</a> 
+  {% endfor %}
+</p>
   </div>
   <div class="col-md-4">
     <p class="minfo">Eier: {{ teaching.eier }}</p>
