@@ -109,3 +109,6 @@ def tags(request, pk):
     tag = Hashtag.objects.get(id=pk)
     ressurser = tag.tagget_ressurs.all()
     return render(request, 'sharestuff/tags.html', {'tag': tag, 'ressurser': ressurser})
+
+def news(request):
+    return render(request, 'sharestuff/news.html', {})
