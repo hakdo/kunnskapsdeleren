@@ -108,7 +108,8 @@ def profile(request):
 def tags(request, pk):
     tag = Hashtag.objects.get(id=pk)
     ressurser = tag.tagget_ressurs.all()
-    return render(request, 'sharestuff/tags.html', {'tag': tag, 'ressurser': ressurser})
+    tags = Hashtag.objects.all()
+    return render(request, 'sharestuff/tags.html', {'tag': tag, 'ressurser': ressurser, 'tags': tags})
 
 def news(request):
     return render(request, 'sharestuff/news.html', {})

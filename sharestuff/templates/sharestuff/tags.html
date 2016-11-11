@@ -2,7 +2,8 @@
 {% load staticfiles %}
 
 {% block content %}
-
+<div class="row">
+  <div class="col-md-8">
 <h1>{{ tag.hashtag }}</h1>
 <p class="minfo">Klikk på prosjektet for å se detaljer og få tilgang til ressurser</p>
 <ul class="list-group">
@@ -38,5 +39,14 @@
 </li>
 {% endfor %}
 </ul>
+</div>
 
+<div class="col-md-4">
+<h1>#tags</h1>
+{% for hashtag in tags %}
+<a href="{% url 'tags' pk=hashtag.pk %}">{{ hashtag.hashtag }}</a>
+{% endfor %}
+
+</div>
+</div>
 {% endblock %}
