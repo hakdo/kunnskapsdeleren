@@ -2,13 +2,30 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="row">
 
-<h1>Liste over hva {{ request.user }} har likt </h1>
+<div class="col-md-4">
+  <h1>
+    <i class="fa fa-heart" aria-hidden="true"></i>
+    Favoritter</h1>
 {% for ting in likte_titler %}
-<p>{{ ting }}</p>
+<p><a href="{% url 'details' pk=ting.pk %}">{{ ting }}</a></p>
 {% endfor %}
-<h1>Liste over hva {{ request.user }} har delt </h1>
+</div>
+<div class="col-md-4">
+<h1>
+<i class="fa fa-gift" aria-hidden="true"></i>
+  Delt </h1>
 {% for ting in har_delt %}
-<p>{{ ting }}</p>
+<p><a href="{% url 'details' pk=ting.pk %}">{{ ting }}</a></p>
 {% endfor %}
+</div>
+<div class="col-md-4">
+<h1>
+<i class="fa fa-user" aria-hidden="true"></i>
+  Brukerinfo</h1>
+<p>Brukernavn: {{ request.user }}</p>
+<p>E-post: {{ request.user.email }}</p>
+</div>
+</div>
 {% endblock %}
