@@ -28,7 +28,8 @@
   </p>
   <div class="userinfo">
     {% if user.is_authenticated %}
-    Du er logget på som {{ user.username }} |
+    Du er logget på som
+    <a href="{% url 'profile' %}">{{ user.username }}</a> |
     <a href="{% url 'logout' %}">
       Logg ut
       <i class="fa fa-sign-out" aria-hidden="true"></i>
