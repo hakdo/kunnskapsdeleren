@@ -90,7 +90,7 @@ def details(request, pk):
         return render(request, 'sharestuff/details.html', {'teaching': teaching, 'has_liked': has_liked, 'tags': tags})
 
 def profile(request):
-    myprofile = User.profile
+    #myprofile = User.profile
     # Find out what the user has liked
     CollectionOfObjects = TeachPack.objects.all()
     likte_titler = []
