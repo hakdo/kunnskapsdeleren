@@ -49,3 +49,7 @@ button.hiddenbutton {
   text-decoration: none;
   color: #aa3c3c;
 }
+
+.errorlist {
+  color: red,
+}
