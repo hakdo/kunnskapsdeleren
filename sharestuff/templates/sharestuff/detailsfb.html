@@ -2,6 +2,10 @@
 
 <html>
 <head>
+  <meta property="og:url"           content="http://hakdo.pythonanywhere.com{{ request.get_full_path }}" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="{{ teaching.tittel }}" />
+  <meta property="og:description"   content="{{ teaching.beskrivelse }}" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,10 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/sharestuff.css' %}">
     <script src="https://use.fontawesome.com/e53afee248.js"></script>
 
-    <meta property="og:url"           content="http://hakdo.pythonanywhere.com{{ request.get_full_path }}" />
-	  <meta property="og:type"          content="website" />
-	  <meta property="og:title"         content="Kunnskapsdeleren - {{ teaching.tittel }}" />
-	  <meta property="og:description"   content="Denne fant jeg på #kunnskapsdeleren. {{ teaching.beskrivelse }}" />
+
 	  <!--meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" /-->
 
 </head>
