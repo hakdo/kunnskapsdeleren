@@ -7,7 +7,10 @@
     <h1>Endre passordet ditt her</h1>
 <form method="POST">{% csrf_token %}
   {{ form.as_p }}
-<button type="submit" value="changepassword">Endre passord</button>
+<div class="btn-group" role="group" style="float: right">
+<button type="submit" class="btn-default btn" value="changepassword">Endre passord</button>
+<a href="{% url 'profile' %}" class="btn-default btn">Avbryt</a>
+</div>
 </form>
 </div>
 <div class="col-md-4">
