@@ -23,7 +23,7 @@ def give(request):
             #pack.beskrivelse
             hashpat = re.compile('#[a-z]+')
             tagsfound = hashpat.findall(pack.beskrivelse)
-            print(tagsfound)
+
             # OK, so we need the hashtag table
 
             try:
@@ -35,14 +35,14 @@ def give(request):
                     if existing_tag is not None:
                         existing_tag.tagget_ressurs.add(pack)
                         existing_tag.save()
-                        print(existing_tag)
+
                     else:
                         new_tag = Hashtag.objects.create(hashtag=tag)
                         new_tag.tagget_ressurs.add(pack)
                         new_tag.save()
-                        print(new_tag)
+
             except Exception as e:
-                print('Unhandled exception')
+                print('Unhandled exception during link sharing')
 
             # Return website
             return redirect('take')
@@ -61,8 +61,7 @@ def details(request, pk):
         t = TeachPack.objects.get(id=pk)
         # Get all hashtags for object
         tags = t.hashtag_set.all()
-        print(t.id)
-        print(tags)
+
         if request.user in t.har_trykt_liker.all():
             has_liked = True
         else:
@@ -78,31 +77,28 @@ def details(request, pk):
             t.save()
             has_liked=False
         teaching = get_object_or_404(TeachPack, pk=pk)
-        print(teaching.har_trykt_liker.all())
+
         return render(request, 'sharestuff/details.html', {'teaching': teaching ,'has_liked': has_liked, 'tags': tags})
     else:
         teaching = get_object_or_404(TeachPack, pk=pk)
         tags = teaching.hashtag_set.all()
-        print(teaching.id, tags)
+
         has_liked=False
         if request.user in teaching.har_trykt_liker.all():
             has_liked = True
         return render(request, 'sharestuff/details.html', {'teaching': teaching, 'has_liked': has_liked, 'tags': tags})
 
-def profile(request):
+def profile(request, **kwargs):
     #myprofile = User.profile
     # Find out what the user has liked
     CollectionOfObjects = TeachPack.objects.all()
     likte_titler = []
     har_delt = []
-    print(request.user)
     for item in CollectionOfObjects:
-            print(item.eier.username)
             if request.user in item.har_trykt_liker.all():
                 likte_titler.append(item)
             if request.user.username == item.eier.username:
                 har_delt.append(item)
-    print(har_delt)
     return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt})
 
 def tags(request, pk):

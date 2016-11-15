@@ -26,6 +26,14 @@
   Brukerinfo</h1>
 <p>Brukernavn: {{ request.user }}</p>
 <p>E-post: {{ request.user.email }}</p>
+<p>
+  <a href="{%url 'changepassword' %}">
+    <i class="fa fa-gift" aria-hidden="true"></i>
+    Endre passord
+  </a>
+</p>
+
 </div>
+
 </div>
 {% endblock %}

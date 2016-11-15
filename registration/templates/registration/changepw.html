@@ -1,0 +1,27 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>Endre passordet ditt her</h1>
+<form method="POST">{% csrf_token %}
+  {{ form.as_p }}
+<button type="submit" value="changepassword">Endre passord</button>
+</form>
+</div>
+<div class="col-md-4">
+  <h1>Tips!</h1>
+  <ul class="list-group">
+    <li class="list-group-item">
+      Om du taster feil passord vil du bli logget ut, av sikkerhetsmessige årsaker.
+  Du må da logge inn igjen med det gamle passordet ditt, før du kan skifte
+  passord.
+</li>
+<li class="list-group-item">
+  Når du har endret passord, vil du bli sendt tilbake til profilen din.
+</li>
+</ul>
+</div>
+</div>
+{% endblock %}

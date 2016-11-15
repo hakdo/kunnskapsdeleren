@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from . forms import BetaForm
+from . forms import BetaForm, ChangePasswordForm
 # Create your views here.
 def beta(request):
     if request.method=="POST":
@@ -24,3 +24,23 @@ def beta(request):
     else:
         form = BetaForm()
         return render(request, 'registration/beta.html', {'form': form})
+
+def changepassword(request):
+    currentUser = request.user
+    if request.method == "POST":
+        form = ChangePasswordForm(request.POST, user=request.user)
+        if form.is_valid():
+            currentuser = request.user
+            currentuser.set_password(form.cleaned_data['passord_nytt_1'])
+            currentuser.save()
+            try:
+                myuser = authenticate(username=currentuser.username, password=form.cleaned_data['passord_nytt_1'])
+                login(request, myuser)
+                return redirect('profile')
+            except:
+                return redirect('givetake')
+        else:
+            return render(request, 'registration/changepw.html', {'form': form})
+    else:
+        form = ChangePasswordForm(user=request.user)
+        return render(request, 'registration/changepw.html', {'form': form})
