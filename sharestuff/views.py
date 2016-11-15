@@ -78,7 +78,7 @@ def details(request, pk):
             has_liked=False
         teaching = get_object_or_404(TeachPack, pk=pk)
 
-        return render(request, 'sharestuff/details.html', {'teaching': teaching ,'has_liked': has_liked, 'tags': tags})
+        return render(request, 'sharestuff/detailsfb.html', {'teaching': teaching ,'has_liked': has_liked, 'tags': tags})
     else:
         teaching = get_object_or_404(TeachPack, pk=pk)
         tags = teaching.hashtag_set.all()
@@ -86,7 +86,7 @@ def details(request, pk):
         has_liked=False
         if request.user in teaching.har_trykt_liker.all():
             has_liked = True
-        return render(request, 'sharestuff/details.html', {'teaching': teaching, 'has_liked': has_liked, 'tags': tags})
+        return render(request, 'sharestuff/detailsfb.html', {'teaching': teaching, 'has_liked': has_liked, 'tags': tags})
 
 def profile(request, **kwargs):
     #myprofile = User.profile
