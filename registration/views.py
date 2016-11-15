@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from . forms import BetaForm, ChangePasswordForm
 # Create your views here.
 def beta(request):
@@ -25,6 +26,7 @@ def beta(request):
         form = BetaForm()
         return render(request, 'registration/beta.html', {'form': form})
 
+@login_required(login_url='login')
 def changepassword(request):
     currentUser = request.user
     if request.method == "POST":

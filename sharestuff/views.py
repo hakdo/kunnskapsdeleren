@@ -55,7 +55,7 @@ def take(request):
     tags = Hashtag.objects.all()
     return render(request, 'sharestuff/take.html', {'teachings': teachings, 'tags': tags })
 
-@login_required(login_url='login')
+#@login_required(login_url='login')
 def details(request, pk):
     if request.method == "POST":
         t = TeachPack.objects.get(id=pk)
@@ -88,6 +88,7 @@ def details(request, pk):
             has_liked = True
         return render(request, 'sharestuff/detailsfb.html', {'teaching': teaching, 'has_liked': has_liked, 'tags': tags})
 
+@login_required(login_url='login')
 def profile(request, **kwargs):
     #myprofile = User.profile
     # Find out what the user has liked
@@ -101,6 +102,7 @@ def profile(request, **kwargs):
                 har_delt.append(item)
     return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt})
 
+@login_required(login_url='login')
 def tags(request, pk):
     tag = Hashtag.objects.get(id=pk)
     ressurser = tag.tagget_ressurs.all()
