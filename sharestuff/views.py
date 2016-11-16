@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import GiveForm
+from .forms import GiveForm, SearchForm
 from .models import TeachPack, Profile, Hashtag
 from django.contrib.auth.models import User
+from django.db.models import Q
 import re
 
 # Create your views here.
@@ -51,9 +52,10 @@ def give(request):
     return render(request, 'sharestuff/give.html', {'form': form })
 
 def take(request):
+    form = SearchForm()
     teachings = TeachPack.objects.order_by('fag').order_by('klasse')
     tags = Hashtag.objects.all()
-    return render(request, 'sharestuff/take.html', {'teachings': teachings, 'tags': tags })
+    return render(request, 'sharestuff/take.html', {'teachings': teachings, 'tags': tags, 'form': form })
 
 #@login_required(login_url='login')
 def details(request, pk):
@@ -111,3 +113,40 @@ def tags(request, pk):
 
 def news(request):
     return render(request, 'sharestuff/news.html', {})
+
+def search(request):
+    if request.method=="POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            sterm = form.cleaned_data['searchterms']
+            print(sterm)
+            termlist = sterm.split()
+            droplist=['av', 'for', 'i', u'å', u'på']
+            hashres = []
+            tittelres = []
+            beskrivelseres=[]
+            for term in termlist:
+                if term not in droplist:
+                    reshs = Hashtag.objects.filter(hashtag__icontains=term)
+                    resti = TeachPack.objects.filter(tittel__icontains=term)
+                    #Append results to list
+                    for tg in reshs:
+                        hashres.append(tg)
+                    for ti in resti:
+                        tittelres.append(ti)
+            # No cleaning impelemented so far, simple word match against hash
+            hashstatus = True
+            tittelstatus = True
+
+            if len(hashres) == 0:
+                hashstatus = False
+            if len(tittelres) == 0:
+                tittelstatus = False
+
+
+            return render(request, 'sharestuff/search.html', \
+                {'form': form, 'hashres': hashres, 'tittelres': tittelres, 'hashstatus': hashstatus, \
+                'tittelstatus': tittelstatus, 'sterm': sterm })
+    else:
+        form = SearchForm()
+        return render(request, 'sharestuff/search.html', {'form': form})
