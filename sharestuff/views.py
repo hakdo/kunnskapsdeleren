@@ -124,16 +124,25 @@ def search(request):
             droplist=['av', 'for', 'i', u'å', u'på']
             hashres = []
             tittelres = []
-            beskrivelseres=[]
+            beskrivelsesres=[]
             for term in termlist:
                 if term not in droplist:
                     reshs = Hashtag.objects.filter(hashtag__icontains=term)
                     resti = TeachPack.objects.filter(tittel__icontains=term)
+                    resbe = TeachPack.objects.filter(beskrivelse__icontains=term)
                     #Append results to list
                     for tg in reshs:
                         hashres.append(tg)
                     for ti in resti:
                         tittelres.append(ti)
+                    for be in resbe:
+                        beskrivelsesres.append(be)
+                    tittelres2 = tittelres + beskrivelsesres
+                    tittelres3 = []
+                    for item in tittelres2:
+                        if item not in tittelres3:
+                            tittelres3.append(item)
+                    tittelres = tittelres3
             # No cleaning impelemented so far, simple word match against hash
             hashstatus = True
             tittelstatus = True
