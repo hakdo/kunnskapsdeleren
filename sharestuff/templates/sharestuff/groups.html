@@ -2,8 +2,36 @@
 {% load staticfiles %}
 
 {% block content %}
-<h1><i class="fa fa-comments-o" aria-hidden="true"></i>{{ group.title }}</h1>
-<p class='likeit'>Eier: {{ group.owner }}</p>
 
+
+<div class="row">
+  <div class="col-md-4">
+    <h1><i class="fa fa-comments-o" aria-hidden="true"></i>{{ group.title }}</h1>
+    <p class='likeit'>Eier: {{ group.owner }}</p>
+
+    <h1><i class="fa fa-users" aria-hidden="true"></i> Members </h1>
+    {% for person in groupmembers %}
+      {{ person }}
+    {% endfor %}
+  </div>
+  <div class="col-md-8">
+    <h1><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Bjeff!</h1>
+
+    <form method="POST" class="form-inline">{% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="form-group">
+        {{ form.bjeff.errors }}
+        <label for="{{ form.bjeff.id_for_label }}" />
+        <input id="id_bjeff" class="form-control" maxlength="300" name="bjeff" type="text" required />
+      </div>
+    <button type="submit" class="btn btn-info" value="bjef">Voff!</button>
+    </form>
+    <h1>Samlebånd</h1>
+    {% for bjeff in allebjeff reversed %}
+    <p class="userinfo">{{ bjeff.eier }} {{ bjeff.datotid }}</p>
+    <p>{{ bjeff.innhold }}</p>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}

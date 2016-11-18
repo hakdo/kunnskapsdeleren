@@ -15,3 +15,6 @@ class GiveForm(forms.ModelForm):
                     )
 class SearchForm(forms.Form):
     searchterms = forms.CharField(max_length=200, label='')
+
+class Bjeff(forms.Form):
+    bjeff = forms.CharField(max_length=200, label='')

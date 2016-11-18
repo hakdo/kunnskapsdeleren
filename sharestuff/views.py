@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import GiveForm, SearchForm
-from .models import TeachPack, Profile, Hashtag, Group
+from .forms import GiveForm, SearchForm, Bjeff
+from .models import TeachPack, Profile, Hashtag, Group, BjeffeLogg
 from django.contrib.auth.models import User
 from django.db.models import Q
 import re
+from datetime import datetime
 
 # Create your views here.
 
@@ -163,6 +164,21 @@ def search(request):
 def group(request, pk):
     this_group = get_object_or_404(Group, pk=pk)
     if request.user in this_group.members.all():
-        return render(request, 'sharestuff/groups.html', {'group': this_group})
+        groupmembers = []
+        for person in this_group.members.all():
+            groupmembers.append(person.username)
+        if request.method=="POST":
+            form = Bjeff(request.POST)
+            if form.is_valid():
+                nyttbjeff = BjeffeLogg(eier=request.user, innhold=form.cleaned_data['bjeff'], gruppe=this_group)
+                nyttbjeff.save()
+                allebjeff = BjeffeLogg.objects.filter(gruppe=this_group)
+            return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
+             'form': form, 'allebjeff': allebjeff})
+        else:
+            allebjeff = BjeffeLogg.objects.filter(gruppe=this_group)
+            form = Bjeff()
+            return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
+            'form': form, 'allebjeff': allebjeff })
     else:
         return render(request, 'sharestuff/groups.html', {})

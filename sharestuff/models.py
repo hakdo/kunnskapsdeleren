@@ -62,3 +62,9 @@ class Group(models.Model):
 
     def __str__(self):
         return self.title
+
+class BjeffeLogg(models.Model):
+    eier = models.ForeignKey(User)
+    innhold = models.CharField(max_length=200)
+    gruppe = models.ForeignKey(Group, blank=True)
+    datotid = models.DateTimeField(auto_now=True)
