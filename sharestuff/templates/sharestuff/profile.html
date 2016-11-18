@@ -33,6 +33,16 @@
   </a>
 </p>
 
+
+{% if group_membership.count > 0  %}
+<h1>Grupper</h1>
+{% for group in group_membership %}
+<p>
+<a href="{% url 'group' pk=group.pk %}">{{ group.title }}</a>
+</p>
+{% endfor %}
+{% endif %}
+
 </div>
 
 </div>

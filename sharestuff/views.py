@@ -103,7 +103,9 @@ def profile(request, **kwargs):
                 likte_titler.append(item)
             if request.user.username == item.eier.username:
                 har_delt.append(item)
-    return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt})
+
+    group_membership = Group.objects.filter(members=request.user)
+    return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt, 'group_membership': group_membership})
 
 @login_required(login_url='login')
 def tags(request, pk):
@@ -161,6 +163,7 @@ def search(request):
         form = SearchForm()
         return render(request, 'sharestuff/search.html', {'form': form})
 
+@login_required(login_url='login')
 def group(request, pk):
     this_group = get_object_or_404(Group, pk=pk)
     if request.user in this_group.members.all():
@@ -181,4 +184,4 @@ def group(request, pk):
             return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
             'form': form, 'allebjeff': allebjeff })
     else:
-        return render(request, 'sharestuff/groups.html', {})
+        return redirect('profile')
