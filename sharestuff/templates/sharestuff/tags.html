@@ -44,6 +44,7 @@
 <div class="col-md-4">
 <h1>#tags</h1>
 {% for hashtag in tags %}
+<!--a href="{% url 'tags' pk=hashtag.pk %}">{{ hashtag.hashtag }}</a-->
 <a href="{% url 'tags' pk=hashtag.pk %}">{{ hashtag.hashtag }}</a>
 {% endfor %}
 <br /><br />

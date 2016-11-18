@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^tag/(?P<pk>\d+)/$', views.tags, name='tags'),
     url(r'^news$', views.news, name='news'),
     url(r'^search$', views.search, name='search'),
+    url(r'^groups/(?P<pk>\d+)/$', views.group, name='group'),
 ]

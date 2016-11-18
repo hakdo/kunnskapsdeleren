@@ -1,0 +1,9 @@
+{% extends 'sharestuff/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1><i class="fa fa-comments-o" aria-hidden="true"></i>{{ group.title }}</h1>
+<p class='likeit'>Eier: {{ group.owner }}</p>
+
+
+{% endblock %}

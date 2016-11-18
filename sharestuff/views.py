@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import GiveForm, SearchForm
-from .models import TeachPack, Profile, Hashtag
+from .models import TeachPack, Profile, Hashtag, Group
 from django.contrib.auth.models import User
 from django.db.models import Q
 import re
@@ -159,3 +159,10 @@ def search(request):
     else:
         form = SearchForm()
         return render(request, 'sharestuff/search.html', {'form': form})
+
+def group(request, pk):
+    this_group = get_object_or_404(Group, pk=pk)
+    if request.user in this_group.members.all():
+        return render(request, 'sharestuff/groups.html', {'group': this_group})
+    else:
+        return render(request, 'sharestuff/groups.html', {})

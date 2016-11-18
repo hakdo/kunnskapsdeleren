@@ -24,6 +24,7 @@ class TeachPack(models.Model):
     mediatype = models.CharField(max_length=200, blank=True, choices=mediaChoices) #Category
     likes = models.IntegerField(default=0)
     har_trykt_liker = models.ManyToManyField(User, related_name='likertrykker', blank=True)
+    publish_status = models.CharField(max_length=10, default='public', choices=(('public', 'Public'),('private','Private'),))
 
 
     def __str__(self):
@@ -53,3 +54,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class Group(models.Model):
+    owner = models.ForeignKey(User)
+    title = models.CharField(max_length=200)
+    members = models.ManyToManyField(User, related_name='group_members', blank=True)
+
+    def __str__(self):
+        return self.title
