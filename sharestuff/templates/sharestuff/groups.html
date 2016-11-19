@@ -9,13 +9,62 @@
     <h1><i class="fa fa-comments-o" aria-hidden="true"></i>{{ group.title }}</h1>
     <p class='likeit'>Eier: {{ group.owner }}</p>
 
-    <h1><i class="fa fa-users" aria-hidden="true"></i> Members </h1>
+    <h1><i class="fa fa-users" aria-hidden="true"></i> Folk </h1>
     {% for person in groupmembers %}
       {{ person }}
     {% endfor %}
   </div>
   <div class="col-md-8">
-    <h1><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Bjeff!</h1>
+    <h1><i class="fa fa-leaf" aria-hidden="true"></i>
+    Vil du ta med noe i dag?
+    <a href="{% url 'addtogroup' pk=group.pk %}">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </a>
+  </h1>
+    <ul class="list-group">
+    {% for teaching in teachings %}
+    <li class="list-group-item list">
+    <a href="{% url 'details' pk=teaching.pk %}">
+      {% if teaching.mediatype == 'youtube' %}
+      <i class="fa fa-youtube" aria-hidden="true"></i>
+      {% endif %}
+      {% if teaching.mediatype == 'powerpoint' %}
+      <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
+      {% endif %}
+      {% if teaching.mediatype == 'text' %}
+      <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      {% endif %}
+      {% if teaching.mediatype == 'zip' %}
+      <i class="fa fa-file-zip-o" aria-hidden="true"></i>
+      {% endif %}
+      {% if teaching.mediatype == 'www' %}
+      <i class="fa fa-external-link" aria-hidden="true"></i>
+      {% endif %}
+      {% if teaching.mediatype == '' %}
+      <i class="fa fa-question-circle" aria-hidden="true"></i>
+      {% endif %}
+
+      {{ teaching.tittel }} | {{ teaching.fag }} | {{ teaching.klasse }}
+      {% if teaching.likes > 0 %}
+      <i class="fa fa-heart-o" aria-hidden="true"></i>
+      <span class="badge ra">{{ teaching.likes }}</span>
+      {% endif %}
+    </a>
+
+    </li>
+    {% endfor %}
+    </ul>
+
+  </div>
+</div>
+<hr />
+<div class="row">
+
+  <div class="col-md-12">
+
+    <h1>
+    <i class="fa fa-list" aria-hidden="true"></i>
+      Kommentarer</h1>
 
     <form method="POST" class="form-inline">{% csrf_token %}
       {{ form.non_field_errors }}
@@ -24,14 +73,21 @@
         <label for="{{ form.bjeff.id_for_label }}" />
         <input id="id_bjeff" class="form-control" maxlength="300" name="bjeff" type="text" required />
       </div>
-    <button type="submit" class="btn btn-info" value="bjef">Voff!</button>
+    <button type="submit" class="btn btn-info" value="bjeff">
+    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+      </button>
     </form>
-    <h1>Samlebånd</h1>
-    {% for bjeff in allebjeff reversed %}
-    <p class="userinfo">{{ bjeff.eier }} {{ bjeff.datotid }}</p>
-    <p>{{ bjeff.innhold }}</p>
-    {% endfor %}
-  </div>
-</div>
 
+    <p>Her vises (inntill videre) de 3 nyeste kommentarene. </p>
+    <ul class="list-group">
+    {% for bjeff in allebjeff reversed %}
+    <li class="list-group-item">
+    {{ bjeff.eier }}: {{ bjeff.innhold }}
+    </li>
+    {% endfor %}
+    </ul>
+
+
+
+  </div>
 {% endblock %}

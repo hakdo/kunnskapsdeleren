@@ -59,6 +59,7 @@ class Group(models.Model):
     owner = models.ForeignKey(User)
     title = models.CharField(max_length=200)
     members = models.ManyToManyField(User, related_name='group_members', blank=True)
+    teachings = models.ManyToManyField(TeachPack, blank=True)
 
     def __str__(self):
         return self.title

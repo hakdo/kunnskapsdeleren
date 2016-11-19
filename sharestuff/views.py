@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import GiveForm, SearchForm, Bjeff
+from .forms import GiveForm, SearchForm, Bjeff, AddToGroup
 from .models import TeachPack, Profile, Hashtag, Group, BjeffeLogg
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -168,6 +168,7 @@ def group(request, pk):
     this_group = get_object_or_404(Group, pk=pk)
     if request.user in this_group.members.all():
         groupmembers = []
+        teachings = this_group.teachings.all()
         for person in this_group.members.all():
             groupmembers.append(person.username)
         if request.method=="POST":
@@ -176,12 +177,32 @@ def group(request, pk):
                 nyttbjeff = BjeffeLogg(eier=request.user, innhold=form.cleaned_data['bjeff'], gruppe=this_group)
                 nyttbjeff.save()
                 allebjeff = BjeffeLogg.objects.filter(gruppe=this_group)
+                allebjeff = allebjeff[len(allebjeff)-3:len(allebjeff)]
             return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
-             'form': form, 'allebjeff': allebjeff})
+             'form': form, 'allebjeff': allebjeff, 'teachings': teachings})
         else:
             allebjeff = BjeffeLogg.objects.filter(gruppe=this_group)
+            allebjeff = allebjeff[len(allebjeff)-3:len(allebjeff)]
             form = Bjeff()
             return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
-            'form': form, 'allebjeff': allebjeff })
+            'form': form, 'allebjeff': allebjeff, 'teachings': teachings })
     else:
         return redirect('profile')
+
+def addtogroup(request, pk):
+    this_group = get_object_or_404(Group, pk=pk)
+
+    if request.method == "POST":
+        form = AddToGroup(request.POST)
+        if request.user in this_group.members.all():
+            if form.is_valid():
+                teachings_to_add = form.cleaned_data['teachings']
+                for teaching in teachings_to_add:
+                    this_group.teachings.add(teaching)
+                this_group.save()
+                return redirect('group', pk=pk)
+            else:
+                return render(request, 'sharestuff/addtogroup.html', {'form': form})
+    else:
+        form = AddToGroup()
+        return render(request, 'sharestuff/addtogroup.html', {'form': form})

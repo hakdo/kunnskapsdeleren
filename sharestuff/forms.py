@@ -1,5 +1,5 @@
 from django import forms
-from .models import TeachPack
+from .models import TeachPack, Group
 
 class GiveForm(forms.ModelForm):
 
@@ -18,3 +18,14 @@ class SearchForm(forms.Form):
 
 class Bjeff(forms.Form):
     bjeff = forms.CharField(max_length=200, label='')
+
+class AddToGroup(forms.ModelForm):
+
+    class Meta:
+        model = Group
+        fields = (
+            'teachings',
+        )
+        labels = {
+            'teachings':  '',
+        }

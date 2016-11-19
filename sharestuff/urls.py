@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^news$', views.news, name='news'),
     url(r'^search$', views.search, name='search'),
     url(r'^groups/(?P<pk>\d+)/$', views.group, name='group'),
+    url(r'^groups/(?P<pk>\d+)/$', views.group, name='group'),
+    url(r'^groups/(?P<pk>\d+)/addtogroup/$', views.addtogroup, name='addtogroup'),
 ]
