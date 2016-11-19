@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import GiveForm, SearchForm, Bjeff, AddToGroup
+from .forms import GiveForm, SearchForm, Bjeff, AddToGroup, AddPeople, AddGroup
 from .models import TeachPack, Profile, Hashtag, Group, BjeffeLogg
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -191,6 +191,7 @@ def group(request, pk):
     else:
         return redirect('profile')
 
+@login_required(login_url='login')
 def addtogroup(request, pk):
     this_group = get_object_or_404(Group, pk=pk)
 
@@ -208,3 +209,44 @@ def addtogroup(request, pk):
     else:
         form = AddToGroup()
         return render(request, 'sharestuff/addtogroup.html', {'form': form})
+
+@login_required(login_url='login')
+def addpeople(request, pk):
+    this_group = get_object_or_404(Group, pk=pk)
+
+    if request.method == "POST":
+        form = AddPeople(request.POST)
+        if request.user == this_group.owner:
+            if form.is_valid():
+                people_to_add = form.cleaned_data['members']
+                for person in people_to_add:
+                    this_group.members.add(person)
+                this_group.save()
+                return redirect('group', pk=pk)
+            else:
+                return render(request, 'sharestuff/addtogroup.html', {'form': form})
+    else:
+        form = AddPeople()
+        return render(request, 'sharestuff/addtogroup.html', {'form': form})
+
+@login_required(login_url='login')
+def addgroup(request):
+    if request.method == "POST":
+        form = AddGroup(request.POST)
+        if form.is_valid():
+            newgroup = form.save(commit = False)
+            newgroup.owner = request.user
+            newgroup.save()
+            qset=form.cleaned_data['members']
+            for person in qset:
+                print(person)
+                newgroup.members.add(person)
+                newgroup.save()
+            newgroup.members.add(request.user)
+            newgroup.save()
+            return redirect('profile')
+        else:
+            return render(request, 'sharestuff/addgroup.html', { 'form': form })
+    else:
+        form = AddGroup()
+        return render(request, 'sharestuff/addgroup.html', { 'form': form })

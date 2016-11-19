@@ -9,7 +9,13 @@
     <h1><i class="fa fa-comments-o" aria-hidden="true"></i>{{ group.title }}</h1>
     <p class='likeit'>Eier: {{ group.owner }}</p>
 
-    <h1><i class="fa fa-users" aria-hidden="true"></i> Folk </h1>
+    <h1><i class="fa fa-users" aria-hidden="true"></i> Folk
+      {% if request.user == group.owner %}
+      <a href="{% url 'addpeople' pk=group.pk %}">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+      {% endif %}
+    </h1>
     {% for person in groupmembers %}
       {{ person }}
     {% endfor %}

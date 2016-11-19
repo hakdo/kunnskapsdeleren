@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^groups/(?P<pk>\d+)/$', views.group, name='group'),
     url(r'^groups/(?P<pk>\d+)/$', views.group, name='group'),
     url(r'^groups/(?P<pk>\d+)/addtogroup/$', views.addtogroup, name='addtogroup'),
+    url(r'^groups/(?P<pk>\d+)/addpeople/$', views.addpeople, name='addpeople'),
+    url(r'^groups/addgroup/$', views.addgroup, name='addgroup'),
 ]

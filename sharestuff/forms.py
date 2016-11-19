@@ -29,3 +29,25 @@ class AddToGroup(forms.ModelForm):
         labels = {
             'teachings':  '',
         }
+
+class AddPeople(forms.ModelForm):
+
+    class Meta:
+        model = Group
+        fields = (
+            'members',
+        )
+        labels = {
+            'members':  '',
+        }
+
+class AddGroup(forms.ModelForm):
+
+    class Meta:
+        model = Group
+        fields=('title','beskrivelse','members')
+        labels = {
+            'title': u'Navn på gruppa',
+            'beskrivelse': u'Hva handler denne gruppa om?',
+            'members': u'Hvem er medlemmene i gruppa?',
+        }
