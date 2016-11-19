@@ -177,12 +177,14 @@ def group(request, pk):
                 nyttbjeff = BjeffeLogg(eier=request.user, innhold=form.cleaned_data['bjeff'], gruppe=this_group)
                 nyttbjeff.save()
                 allebjeff = BjeffeLogg.objects.filter(gruppe=this_group)
-                allebjeff = allebjeff[len(allebjeff)-3:len(allebjeff)]
+                if len(allebjeff)>3:
+                    allebjeff = allebjeff[len(allebjeff)-3:len(allebjeff)]
             return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
              'form': form, 'allebjeff': allebjeff, 'teachings': teachings})
         else:
             allebjeff = BjeffeLogg.objects.filter(gruppe=this_group)
-            allebjeff = allebjeff[len(allebjeff)-3:len(allebjeff)]
+            if len(allebjeff)>3:
+                allebjeff = allebjeff[len(allebjeff)-3:len(allebjeff)]
             form = Bjeff()
             return render(request, 'sharestuff/groups.html', {'group': this_group, 'groupmembers': groupmembers,\
             'form': form, 'allebjeff': allebjeff, 'teachings': teachings })
