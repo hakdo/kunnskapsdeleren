@@ -54,7 +54,7 @@ def give(request):
 
 def take(request):
     form = SearchForm()
-    teachings = TeachPack.objects.order_by('fag').order_by('klasse')
+    teachings = TeachPack.objects.filter(publish_status='public').order_by('fag').order_by('klasse')
     tags = Hashtag.objects.all()
     return render(request, 'sharestuff/take.html', {'teachings': teachings, 'tags': tags, 'form': form })
 
@@ -203,7 +203,8 @@ def group(request, pk):
 @login_required(login_url='login')
 def addtogroup(request, pk):
     this_group = get_object_or_404(Group, pk=pk)
-
+    filterQuerySet = TeachPack.objects.filter(publish_status='public')|\
+        TeachPack.objects.filter(publish_status='private').filter(eier=request.user)
     if request.method == "POST":
         form = AddToGroup(request.POST)
         if request.user in this_group.members.all():
@@ -214,9 +215,11 @@ def addtogroup(request, pk):
                 this_group.save()
                 return redirect('group', pk=pk)
             else:
+                form.fields['teachings'].queryset=filterQuerySet
                 return render(request, 'sharestuff/addtogroup.html', {'form': form})
     else:
         form = AddToGroup()
+        form.fields['teachings'].queryset=filterQuerySet
         return render(request, 'sharestuff/addtogroup.html', {'form': form})
 
 @login_required(login_url='login')

@@ -8,6 +8,7 @@
 <p class="minfo">Klikk på prosjektet for å se detaljer og få tilgang til ressurser</p>
 <ul class="list-group">
 {% for teaching in ressurser %}
+{% if teaching.publish_status == 'public' %}
 <li class="list-group-item list">
 <a href="{% url 'details' pk=teaching.pk %}">
 {% if teaching.mediatype == 'youtube' %}
@@ -37,6 +38,7 @@
 </a>
 
 </li>
+{% endif %}
 {% endfor %}
 </ul>
 </div>

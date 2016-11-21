@@ -22,7 +22,7 @@ class Bjeff(forms.Form):
     bjeff = forms.CharField(max_length=200, label='')
 
 class AddToGroup(forms.ModelForm):
-
+    
     class Meta:
         model = Group
         fields = (
@@ -31,6 +31,7 @@ class AddToGroup(forms.ModelForm):
         labels = {
             'teachings':  '',
         }
+
 
 class AddPeople(forms.ModelForm):
 
