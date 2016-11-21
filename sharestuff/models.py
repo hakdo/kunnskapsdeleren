@@ -56,6 +56,8 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 class Group(models.Model):
+
+
     owner = models.ForeignKey(User)
     title = models.CharField(max_length=200)
     members = models.ManyToManyField(User, related_name='group_members', blank=True)
@@ -64,6 +66,8 @@ class Group(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 class BjeffeLogg(models.Model):
     eier = models.ForeignKey(User)

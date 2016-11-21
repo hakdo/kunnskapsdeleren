@@ -19,7 +19,17 @@
 {% for ting in har_delt %}
 <p><a href="{% url 'details' pk=ting.pk %}">{{ ting }}</a></p>
 {% endfor %}
+{% if har_delt_privat|length > 0 %}
+<h1>Privat</h2>
+{% for ting in har_delt_privat %}
+<p><a href="{% url 'details' pk=ting.pk %}">{{ ting }}</a></p>
+{% endfor %}
+{% endif %}
+
+
 </div>
+
+
 <div class="col-md-4">
 <h1>
 <i class="fa fa-user" aria-hidden="true"></i>

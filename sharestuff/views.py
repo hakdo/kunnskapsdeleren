@@ -95,17 +95,23 @@ def details(request, pk):
 def profile(request, **kwargs):
     #myprofile = User.profile
     # Find out what the user has liked
-    CollectionOfObjects = TeachPack.objects.all()
+    CollectionOfObjects = TeachPack.objects.filter(publish_status='public')
+    CollectionOfOBjectsPrivate = TeachPack.objects.filter(publish_status='private')
     likte_titler = []
     har_delt = []
+    har_delt_privat = []
     for item in CollectionOfObjects:
-            if request.user in item.har_trykt_liker.all():
-                likte_titler.append(item)
-            if request.user.username == item.eier.username:
-                har_delt.append(item)
+        if request.user in item.har_trykt_liker.all():
+            likte_titler.append(item)
+        if request.user.username == item.eier.username:
+            har_delt.append(item)
+    for item in CollectionOfOBjectsPrivate:
+        if request.user.username == item.eier.username:
+            har_delt_privat.append(item)
 
     group_membership = Group.objects.filter(members=request.user)
-    return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt, 'group_membership': group_membership})
+    return render(request, 'sharestuff/profile.html', {'likte_titler': likte_titler, 'har_delt': har_delt,\
+        'group_membership': group_membership, 'har_delt_privat': har_delt_privat})
 
 @login_required(login_url='login')
 def tags(request, pk):
@@ -137,9 +143,11 @@ def search(request):
                     for tg in reshs:
                         hashres.append(tg)
                     for ti in resti:
-                        tittelres.append(ti)
+                        if ti.publish_status == 'public':
+                            tittelres.append(ti)
                     for be in resbe:
-                        beskrivelsesres.append(be)
+                        if be.publish_status == 'public':
+                            beskrivelsesres.append(be)
                     tittelres2 = tittelres + beskrivelsesres
                     tittelres3 = []
                     for item in tittelres2:
@@ -168,7 +176,8 @@ def group(request, pk):
     this_group = get_object_or_404(Group, pk=pk)
     if request.user in this_group.members.all():
         groupmembers = []
-        teachings = this_group.teachings.all()
+        teachings = this_group.teachings.filter(publish_status='public') | \
+            this_group.teachings.filter(publish_status='private', eier__in=this_group.members.all())
         for person in this_group.members.all():
             groupmembers.append(person.username)
         if request.method=="POST":

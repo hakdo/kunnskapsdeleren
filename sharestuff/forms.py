@@ -12,6 +12,8 @@ class GiveForm(forms.ModelForm):
                     'fag',
                     'link',
                     'mediatype',
+                    'publish_status',
+
                     )
 class SearchForm(forms.Form):
     searchterms = forms.CharField(max_length=200, label='')
