@@ -2,6 +2,8 @@
 *~
 __pycache__
 myproject
+myvenv
 db.sqlite3
 /static
 .DS_Store
+manage.py
