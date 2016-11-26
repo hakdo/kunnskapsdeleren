@@ -12,6 +12,9 @@ from datetime import datetime
 def givetake(request):
     return render(request, 'sharestuff/givetake.html', {})
 
+def gt2(request):
+    return render(request, 'sharestuff/givetake2.html', {})
+
 @login_required(login_url='login')
 def give(request):
     if request.method == "POST":

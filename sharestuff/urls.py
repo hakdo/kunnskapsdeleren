@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.givetake, name='givetake'),
+    url(r'^gt2/$', views.gt2, name='givetake2'),
     url(r'^give$', views.give, name='give'),
     url(r'^take$', views.take, name='take'),
     url(r'^details/(?P<pk>\d+)/$', views.details, name='details'),

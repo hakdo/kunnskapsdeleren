@@ -1,0 +1,48 @@
+{% extends 'sharestuff/base.html' %}
+{% block content %}
+     <div class="row">
+       {% if newreg == True %}
+       <h1><i class="fa fa-user" aria-hidden="true"></i>
+         Velkommen som ny bruker, {{ request.user }}!
+       </h1>
+       <hr />
+      {% endif %}
+       <div class="col-md-4">
+         <a href="{{ 'give' }}">
+         <h1><i class="fa fa-gift" aria-hidden="true"></i>
+           Del</h1>
+       </a>
+
+         <p>
+           Del dine beste undervisningsopplegg her - og la samfunn, kolleger og
+           elever nyte godt av det du har å gi!
+         </p>
+
+
+       </div>
+       <div class="col-md-4">
+         <a href="{{ 'take' }}">
+         <h1>
+           <h1><i class="fa fa-leaf" aria-hidden="true"></i>
+           Finn</h1>
+       </a>
+         <p>
+           Gode lærere deler kunnskap. Hent kunnskap og inspirasjon her.
+           Gratis - og til beste for samfunn, lærer og elev!
+         </p>
+
+       </div>
+       <div class="col-md-4">
+         <a href="{% url 'news' %}">
+         <h1><i class="fa fa-bullhorn" aria-hidden="true"></i>
+           Nyheter</h1>
+         </a>
+         <p>Ny plattform for å dele undervisningsopplegg - sorter på klasse og fag!
+         </p>
+       </div>
+     </div>
+     <hr>
+     <address class="minfo">verjson: proto_0.1 |
+       <a href="mailto:hakdo@outlook.com">hakdo@outlook.com</a>
+     </address>
+{% endblock %}

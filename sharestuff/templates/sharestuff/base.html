@@ -43,6 +43,33 @@
     {% endif %}
   </div>
   </div>
+  <ul class="nav nav-tabs">
+    {% if request.path == '/' %}
+    <li role="presentation" class="active"><a href="{% url 'givetake' %}">Hjem</a></li>
+    {% else %}
+    <li role="presentation"><a href="{% url 'givetake' %}">Hjem</a></li>
+    {% endif %}
+    {% if request.path == '/give' %}
+    <li role="presentation" class="active"><a href="{% url 'give' %}">Del</a></li>
+    {% else %}
+    <li role="presentation"><a href="{% url 'give' %}">Del</a></li>
+    {% endif %}
+    {% if request.path == '/take' %}
+    <li role="presentation" class="active"><a href="{% url 'take' %}">Finn</a></li>
+    {% else %}
+    <li role="presentation"><a href="{% url 'take' %}">Finn</a></li>
+    {% endif %}
+    {% if request.path == '/search' %}
+    <li role="presentation" class="active"><a href="{% url 'search' %}">Søk</a></li>
+    {% else %}
+    <li role="presentation"><a href="{% url 'search' %}">Søk</a></li>
+    {% endif %}
+    {% if request.path == '/p' %}
+    <li role="presentation" class="active"><a href="{% url 'profile' %}">Min Profil</a></li>
+    {% else %}
+    <li role="presentation"><a href="{% url 'profile' %}">Min Profil</a></li>
+    {% endif %}
+    </ul>
 
 {% block content %}
 {% endblock %}
