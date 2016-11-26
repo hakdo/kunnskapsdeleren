@@ -64,10 +64,12 @@
     {% else %}
     <li role="presentation"><a href="{% url 'search' %}">Søk</a></li>
     {% endif %}
+    {% if user.is_authenticated %}
     {% if request.path == '/p' %}
     <li role="presentation" class="active"><a href="{% url 'profile' %}">Min Profil</a></li>
     {% else %}
     <li role="presentation"><a href="{% url 'profile' %}">Min Profil</a></li>
+    {% endif %}
     {% endif %}
     </ul>
 
