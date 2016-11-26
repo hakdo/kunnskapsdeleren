@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import GiveForm, SearchForm, Bjeff, AddToGroup, AddPeople, AddGroup
-from .models import TeachPack, Profile, Hashtag, Group, BjeffeLogg
+from .models import TeachPack, Profile, Hashtag, Group, BjeffeLogg, News
 from django.contrib.auth.models import User
 from django.db.models import Q
 import re
@@ -124,7 +124,12 @@ def tags(request, pk):
     return render(request, 'sharestuff/tags.html', {'tag': tag, 'ressurser': ressurser, 'tags': tags})
 
 def news(request):
-    return render(request, 'sharestuff/news.html', {})
+    if request.method=="POST":
+        newsfeed = News.objects.all().order_by('datotid').reverse()
+    else:
+        newsfeed = News.objects.all().order_by('datotid').reverse()
+        newsfeed = newsfeed[0:min(len(newsfeed),3)]
+    return render(request, 'sharestuff/news.html', {'newsfeed': newsfeed})
 
 def search(request):
     if request.method=="POST":

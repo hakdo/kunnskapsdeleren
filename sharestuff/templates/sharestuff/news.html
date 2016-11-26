@@ -1,10 +1,37 @@
 {% extends 'sharestuff/base.html' %}
 {% block content %}
+<div class="row">
+  <div class="col-md-8">
 <h1>
 <i class="fa fa-bullhorn" aria-hidden="true"></i>
   Nyheter</h1>
 
-  <h3>Private lenker <small>26. oktober 2016</small> </h3>
+  <ul class="list-group">
+    {% for item in newsfeed %}
+    <li class="list-group-item">
+      <h3>{{ item.tittel }}<small> {{ item.datotid | date:'d.m.Y' }}</small></h3>
+      <p>{{ item.beskjed }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="col-md-4">
+  <h1><br /></h1>
+  <form method="POST">{% csrf_token %}
+  <button type="submit" class="hiddenbutton">
+  <p class="likeit">
+
+    <i class="fa fa-expand" aria-hidden="true"></i>
+    Les alle
+  </p>
+</button>
+</form>
+</div>
+<h1> </h1>
+</div>
+
+
+    <!--h3>Private lenker <small>26. oktober 2016</small> </h3>
   <p>Når du legger til en lenke via <a href="{% url 'give' %}">delingssiden</a>
   kan du nå markere lenken som "private". Da er den kun synlig for deg via
 profilsiden din, inntil du velger å dele den med noen andre i en gruppe. </p>
@@ -29,7 +56,7 @@ profilsiden din, inntil du velger å dele den med noen andre i en gruppe. </p>
   du bruke emneknagger i "beskrivelsesfeltet". Slik kan brukere finne
   liknende ressurser ved å filtrere på hashtags. Senere vil også et
   hashtag-søk bli lagt til.
-</p>
+</p-->
 
 
 

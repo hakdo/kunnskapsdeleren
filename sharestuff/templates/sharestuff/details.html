@@ -12,7 +12,7 @@
 <hr />
 <p>
   {% for tag in tags %}
-    <a href="{% url 'tags' pk=tag.pk %}">{{ tag.hashtag }}</a> 
+    <a href="{% url 'tags' pk=tag.pk %}">{{ tag.hashtag }}</a>
   {% endfor %}
 </p>
   </div>
@@ -61,6 +61,7 @@
       {% endif %}
     </p>
   </button>
+</form>
     <p class="likeit">
       <a class="likeit" href="{% url 'take' %}">
       <i class="fa fa-list" aria-hidden="true"></i>
