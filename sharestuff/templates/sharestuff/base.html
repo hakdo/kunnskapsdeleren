@@ -11,13 +11,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/sharestuff.css' %}">
     <script src="https://use.fontawesome.com/e53afee248.js"></script>
-
+    <style>
+      .carousel-inner > .item > img,
+      .carousel-inner > .item > a > img {
+          width: 70%;
+          margin: auto;
+      }
+      </style>
 
 
 </head>
 <body>
   <div class="container">
-    <div class="jumbotron">
+    <!--div class="jumbotron">
       <a href="/">
   <h1>Kunnskapsdeleren
     <small>BETA</small>
@@ -42,7 +48,27 @@
     </a>
     {% endif %}
   </div>
+</div-->
+  <div class="page-header">
+    <h1>Kunnskapsdeleren</h1>
+    <div class="userinfo">
+      {% if user.is_authenticated %}
+      Du er logget på som
+      <a href="{% url 'profile' %}">{{ user.username }}</a> |
+      <a href="{% url 'logout' %}">
+        Logg ut
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+      </a>
+      {% endif %}
+      {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}">
+        Logg inn
+        <i class="fa fa-sign-in" aria-hidden="true"></i>
+      </a>
+      {% endif %}
+    </div>
   </div>
+
   <ul class="nav nav-tabs">
     {% if request.path == '/' %}
     <li role="presentation" class="active"><a href="{% url 'givetake' %}">Hjem</a></li>
@@ -75,6 +101,7 @@
 
 {% block content %}
 {% endblock %}
+</div>
 </div>
 </body>
 </html>

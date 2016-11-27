@@ -1,48 +1,108 @@
 {% extends 'sharestuff/base.html' %}
 {% block content %}
-     <div class="row">
-       {% if newreg == True %}
-       <h1><i class="fa fa-user" aria-hidden="true"></i>
-         Velkommen som ny bruker, {{ request.user }}!
-       </h1>
-       <hr />
-      {% endif %}
-       <div class="col-md-4">
-         <a href="{{ 'give' }}">
-         <h1><i class="fa fa-gift" aria-hidden="true"></i>
-           Del</h1>
-       </a>
 
-         <p>
-           Del dine beste undervisningsopplegg her - og la samfunn, kolleger og
-           elever nyte godt av det du har å gi!
-         </p>
+<div class="row">
+  <div class="col-md-4">
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <a href="{% url 'give' %}">
+      <img src="/static/img/gangbru.PNG" alt="..." style="width: 400px;">
+      <div class="carousel-caption">
+      	<h3>Del</h3>
+
+      </div>
+    </a>
+    </div>
+    <div class="item">
+      <a href="{% url 'take' %}">
+      <img src="/static/img/kattejakt.PNG" alt="..." style="width: 400px;">
+      <div class="carousel-caption">
+      	<h3>Finn</h3>
+        <p>
+      </div>
+    </a>
+    </div>
+    <div class="item">
+      <a href="{% url 'news' %}">
+      <img src="/static/img/ender.PNG" alt="..." style="width: 400px;">
+      <div class="carousel-caption">
+      	<h3>Nyheter</h3>
+      </div>
+    </a>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div> <!-- Carousel -->
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-7">
+    {% if newreg == True %}
+    <h1><i class="fa fa-user" aria-hidden="true"></i>
+      Velkommen som ny bruker, {{ request.user }}!
+    </h1>
+    <hr />
+   {% endif %}
+    <div>
+      <a href="{{ 'give' }}">
+      <h1><i class="fa fa-gift" aria-hidden="true"></i>
+        Del</h1>
+    </a>
+
+      <p>
+        Del dine beste undervisningsopplegg her - og la samfunn, kolleger og
+        elever nyte godt av det du har å gi!
+      </p>
 
 
-       </div>
-       <div class="col-md-4">
-         <a href="{{ 'take' }}">
-         <h1>
-           <h1><i class="fa fa-leaf" aria-hidden="true"></i>
-           Finn</h1>
-       </a>
-         <p>
-           Gode lærere deler kunnskap. Hent kunnskap og inspirasjon her.
-           Gratis - og til beste for samfunn, lærer og elev!
-         </p>
+    </div>
 
-       </div>
-       <div class="col-md-4">
-         <a href="{% url 'news' %}">
-         <h1><i class="fa fa-bullhorn" aria-hidden="true"></i>
-           Nyheter</h1>
-         </a>
-         <p>Ny plattform for å dele undervisningsopplegg - sorter på klasse og fag!
-         </p>
-       </div>
-     </div>
+    <div>
+      <a href="{{ 'take' }}">
+      <h1>
+        <h1><i class="fa fa-leaf" aria-hidden="true"></i>
+        Finn</h1>
+    </a>
+      <p>
+        Gode lærere deler kunnskap. Hent kunnskap og inspirasjon her.
+        Gratis - og til beste for samfunn, lærer og elev!
+      </p>
+
+    </div>
+    <div>
+      <a href="{% url 'news' %}">
+      <h1><i class="fa fa-bullhorn" aria-hidden="true"></i>
+        Nyheter</h1>
+      </a>
+      <p>Ny plattform for å dele undervisningsopplegg - sorter på klasse og fag!
+      </p>
+    </div>
+
+
+
+</div>
+</div>
+
      <hr>
      <address class="minfo">verjson: proto_0.1 |
        <a href="mailto:hakdo@outlook.com">hakdo@outlook.com</a>
      </address>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 {% endblock %}

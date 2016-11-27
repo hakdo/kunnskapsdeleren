@@ -53,3 +53,12 @@ button.hiddenbutton {
 .errorlist {
   color: red,
 }
+
+.carousel {
+    background-color: #ccccaa;
+    position: relative;
+    padding: 10px;
+    width: 400px;
+    height: 400px;
+    margin: 10px auto;
+}
