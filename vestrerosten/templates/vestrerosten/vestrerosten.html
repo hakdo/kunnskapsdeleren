@@ -1,0 +1,39 @@
+{% extends 'vestrerosten/base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Skriv det på listen her!</h3>
+<form method="post" class="form"> {% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="btn btn-primary">Signer!</button>
+</form>
+<hr />
+</div>
+<div class="col-md-6">
+<h2>Opprop</h2>
+<p>
+Dette er en virtuell underskriftskampanje for å bedre
+trafikksikkerheten i Vestre Rosten med nærområde på Heimdal.
+Etter at Sivert Thonstads vei ble stengt for gjennomkjøring,
+og avkjøring fra E6 til Johan Tillers vei, har det blitt en
+enorm økning i gjennomgangstrafikk i Vestre Rosten. Dette er
+en boliggate, skolevei for mange barn, og veien til og fra
+fritidsaktiviteter. </p>
+<p>Signer oppropet i dag du også og bidra til å påvirke byutviklingen
+  i nærområdet!</p>
+</div>
+</div>
+<h1>Signaturer til støtte for bedre trafikksikkerhet</h1>
+<ul class="list-group">
+{% for item in signed %}
+<li class="list-group-item">
+  <div>
+  <h3>{{ item.navn }}</h3> {{ item.adresse }}</p>
+  <p class="userinfo">{{ item.kommentar }}</p>
+</div>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

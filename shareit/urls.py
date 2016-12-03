@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('sharestuff.urls')),
     url(r'^', include('registration.urls')),
+    url(r'^', include('vestrerosten.urls')),
 ]
